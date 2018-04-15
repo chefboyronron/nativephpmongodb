@@ -124,5 +124,15 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
-      # run tests!!
-      - run: phpunit
+      # run tests!
+      - run: vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v --dry-run --stop-on-violation --using-cache=no --path-mode=intersection -- src tests
+
+workflows:
+  version: 2
+  test_and_lint:
+    jobs:
+      - phpunit-56-lowest
+      - phpunit-56
+      - phpunit-70
+      - phpunit-71
+      - code-fixer
