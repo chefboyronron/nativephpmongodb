@@ -1,4 +1,4 @@
-# PHP CircleCI 2.0 configuration file
+ PHP CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
@@ -125,14 +125,4 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       # run tests!
-      - run: vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v --dry-run --stop-on-violation --using-cache=no --path-mode=intersection -- src tests
-
-workflows:
-  version: 2
-  test_and_lint:
-    jobs:
-      - phpunit-56-lowest
-      - phpunit-56
-      - phpunit-70
-      - phpunit-71
-      - code-fixer
+      - run: phpunit
